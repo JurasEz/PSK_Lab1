@@ -1,0 +1,10 @@
+<datasources>
+    <datasource jndi-name="StudentDataSource" pool-name="StudentDataSource">
+        <driver>h2</driver>
+        <connection-url>jdbc:h2:~/h2database/StudentDB;AUTO_SERVER=TRUE</connection-url>
+        <security>
+            <user-name>sa</user-name>
+            <password>sa</password>
+        </security>
+    </datasource>
+</datasources>
