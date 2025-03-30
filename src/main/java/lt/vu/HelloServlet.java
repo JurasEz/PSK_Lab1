@@ -1,4 +1,4 @@
-package com.example.psk_lab1;
+package lt.vu;
 
 import java.io.*;
 

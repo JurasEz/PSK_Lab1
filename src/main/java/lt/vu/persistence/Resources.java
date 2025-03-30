@@ -1,4 +1,4 @@
-package com.example.psk_lab1.persistence;
+package lt.vu.persistence;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.context.RequestScoped;

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 1. Define aliases for your model classes -->
+    <typeAliases>
+        <typeAlias type="lt.vu.mybatis.model.Group" alias="Group"/>
+        <typeAlias type="lt.vu.mybatis.model.Student" alias="Student"/>
+        <typeAlias type="lt.vu.mybatis.model.Lecture" alias="Lecture"/>
+    </typeAliases>
+
+    <!-- 2. Database connection settings -->
+    <environments default="development">
+        <environment id="development">
+            <!-- Use "MANAGED" for Jakarta EE (WildFly) transactions -->
+            <transactionManager type="MANAGED"/>
+
+            <!-- 3. JNDI DataSource (for WildFly) -->
+            <dataSource type="JNDI">
+                <property name="data_source" value="java:jboss/datasources/StudentDB"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 4. Register your mapper XML files -->
+    <mappers>
+        <mapper resource="mybatis.xml/GroupMapper.xml"/>
+        <mapper resource="mybatis.xml/StudentMapper.xml"/>
+        <mapper resource="mybatis.xml/LectureMapper.xml"/>
+    </mappers>
+</configuration>
