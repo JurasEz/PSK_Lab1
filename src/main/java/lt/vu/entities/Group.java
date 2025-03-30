@@ -9,6 +9,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Group.findAll", query = "SELECT g FROM Group g"),
+})
 @Getter @Setter // Automatically generate getter and setter methods for all fields
 @Table(name = "GROUP_TABLE") // "GROUP" is a SQL reserved word
 @EqualsAndHashCode(of = "id") // Use the id field for equality checks

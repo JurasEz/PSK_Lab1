@@ -9,6 +9,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQueries({
+        @NamedQuery(name = "Student.findAll", query = "SELECT s FROM Student s"),
+        @NamedQuery(name = "Student.findByGroup",
+                query = "SELECT s FROM Student s WHERE s.group.id = :groupId"),
+})
 @Getter @Setter // Automatically generate getter and setter methods for all fields
 @EqualsAndHashCode(of = "id") // Use the id field for equality checks
 public class Student {
