@@ -1,0 +1,206 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f5f7fa;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+/* Headings */
+h1, h2, h3 {
+    color: #2c3e50;
+    margin-top: 0;
+}
+
+h2 {
+    border-bottom: 2px solid #3498db;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Lists */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    padding: 8px 0;
+    border-bottom: 1px solid #eee;
+}
+
+/* Links */
+a {
+    color: #3498db;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+a:hover {
+    color: #2980b9;
+}
+
+/* Forms */
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* General button styles */
+.btn,
+input[type="submit"] {
+    display: inline-block;
+    width: 100%;
+    max-width: 200px; /* Prevent excessive width */
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 12px 20px; /* Bigger padding */
+    border-radius: 6px; /* Rounded corners */
+    cursor: pointer;
+    font-size: 18px; /* Bigger font */
+    font-weight: 600;
+    text-align: center;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px; /* Space above the button */
+    margin-bottom: 15px; /* Space below the button */
+}
+
+/* Hover effect */
+.btn:hover,
+input[type="submit"]:hover {
+    background-color: #2980b9;
+    transform: scale(1.05); /* Slight hover effect */
+}
+
+/* Click effect */
+.btn:active,
+input[type="submit"]:active {
+    background-color: #1b6ca8;
+    transform: scale(0.98);
+}
+
+
+
+/* Cards */
+.card {
+    background: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+/* Navigation */
+.nav {
+    margin-bottom: 30px;
+}
+
+/* Messages */
+.ui-messages {
+    margin: 20px 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .container {
+        padding: 15px;
+    }
+}
+
+/* Group Specific Styles */
+.group-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 15px;
+}
+
+.group-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 6px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.group-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.group-link {
+    display: block;
+    font-size: 18px;
+    color: #2c3e50;
+}
+
+/* Form Enhancements */
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 14px;
+}
+
+.btn-primary {
+    background-color: #1b194d;
+}
+
+.btn-primary:hover {
+    background-color: #07061a;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* LECTURER PNG */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.content {
+    flex: 1; /* Takes up remaining space */
+}
+
+.lecturer-image img {
+    max-width: 300px; /* Adjust width */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-left: 20px; /* Space between text and image */
+}

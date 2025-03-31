@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.transaction.Transactional;
 import java.util.List;
 
-@Model // @RequestScoped ir @Named kombinacija
+@Model // @RequestScoped ir @Named (kad būtų pasiekiama per JSF/XHTML) kombinacija
 public class Groups {
 
     @Inject

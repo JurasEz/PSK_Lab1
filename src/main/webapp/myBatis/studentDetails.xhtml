@@ -4,17 +4,17 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Student Details</title>
-    <link rel="stylesheet" href="css/styles.css"/>
+    <title>Student Details (MyBatis)</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
 </h:head>
 <h:body>
     <div class="container">
         <div class="content">
             <h:messages globalOnly="true" style="color:red"/>
 
-            <h2>Lectures for #{lecturesForStudent.student.name} #{lecturesForStudent.student.surname}</h2>
+            <h2>Lectures for #{lecturesForStudentMyBatis.student.name} #{lecturesForStudentMyBatis.student.surname}</h2>
             <ul>
-                <ui:repeat value="#{lecturesForStudent.lectures}" var="lecture">
+                <ui:repeat value="#{lecturesForStudentMyBatis.lectures}" var="lecture">
                     <li>
                         #{lecture.name}
                         <h:panelGroup rendered="#{not empty lecture.lecturer}">
@@ -26,29 +26,25 @@
 
             <h2>Add Lecture</h2>
             <h:form>
-                <!-- Add hidden field for studentId -->
-                <h:inputHidden value="#{lecturesForStudent.student.id}" />
-
+                <h:inputHidden value="#{lecturesForStudentMyBatis.student.id}" />
                 <div>
                     <h:outputLabel for="name" value="Lecture Name: " />
-                    <h:inputText id="name" value="#{lecturesForStudent.lectureToCreate.name}"
-                                 required="true" requiredMessage="Lecture name is required"/>
+                    <h:inputText id="name" value="#{lecturesForStudentMyBatis.lectureToCreate.name}" required="true"/>
                     <h:message for="name" style="color:red"/>
                 </div>
                 <div>
                     <h:outputLabel for="lecturer" value="Lecturer: " />
-                    <h:inputText id="lecturer" value="#{lecturesForStudent.lectureToCreate.lecturer}"/>
+                    <h:inputText id="lecturer" value="#{lecturesForStudentMyBatis.lectureToCreate.lecturer}"/>
                 </div>
                 <div>
-                    <h:commandButton value="Add Lecture" action="#{lecturesForStudent.createLecture}">
-                        <!-- Pass studentId as parameter -->
-                        <f:param name="studentId" value="#{lecturesForStudent.student.id}"/>
+                    <h:commandButton value="Add Lecture" action="#{lecturesForStudentMyBatis.createLecture}">
+                        <f:param name="studentId" value="#{lecturesForStudentMyBatis.student.id}"/>
                     </h:commandButton>
                 </div>
             </h:form>
 
             <h:link value="Back to Students" outcome="students">
-                <f:param name="groupId" value="#{lecturesForStudent.student.group.id}"/>
+                <f:param name="groupId" value="#{lecturesForStudentMyBatis.student.group.id}"/>
             </h:link>
         </div>
         <!-- Lecturer Image -->

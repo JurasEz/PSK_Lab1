@@ -4,7 +4,7 @@
         "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
 
 <generatorConfiguration>
-    <context id="StudentDB" targetRuntime="MyBatis3">
+    <context id="StudentDB" targetRuntime="MyBatis3Simple">
         <jdbcConnection driverClass="org.h2.Driver"
                         connectionURL="jdbc:h2:~/h2database/StudentDB;AUTO_SERVER=TRUE"
                         userId="sa"
@@ -12,25 +12,35 @@
         </jdbcConnection>
 
         <javaModelGenerator targetPackage="lt.vu.mybatis.model" targetProject="MAVEN"/>
-        <sqlMapGenerator targetPackage="lt.vu.mybatis.xml" targetProject="MAVEN"/>
+        <sqlMapGenerator targetPackage="mybatis.xml" targetProject="MAVEN"/>
         <javaClientGenerator type="XMLMAPPER" targetPackage="lt.vu.mybatis.dao" targetProject="MAVEN"/>
 
         <!-- Group table -->
         <table schema="PUBLIC" tableName="GROUP_TABLE">
             <generatedKey column="ID" identity="true" sqlStatement="JDBC"/>
-            <columnOverride column="DISCIPLINE" property="disciplineName"/>
-            <columnOverride column="SEMESTER" property="semesterNumber"/>
+            <columnOverride column="DISCIPLINE" property="discipline"/>
+            <columnOverride column="SEMESTER" property="semester"/>
         </table>
 
         <!-- Lecture table -->
         <table schema="PUBLIC" tableName="LECTURE">
             <generatedKey column="ID" identity="true" sqlStatement="JDBC"/>
+            <columnOverride column="LECTURER" property="lecturer"/>
+            <columnOverride column="NAME" property="name"/>
         </table>
 
         <!-- Student table -->
         <table schema="PUBLIC" tableName="STUDENT">
             <generatedKey column="ID" identity="true" sqlStatement="JDBC"/>
+            <columnOverride column="NAME" property="name"/>
+            <columnOverride column="SURNAME" property="surname"/>
             <columnOverride column="GROUP_ID" property="groupId"/>
+        </table>
+
+        <!-- Many-to-Many relationship between Student and Lecture -->
+        <table schema="PUBLIC" tableName="STUDENT_LECTURE">
+            <columnOverride column="STUDENT_ID" property="studentId"/>
+            <columnOverride column="LECTURE_ID" property="lectureId"/>
         </table>
     </context>
 </generatorConfiguration>

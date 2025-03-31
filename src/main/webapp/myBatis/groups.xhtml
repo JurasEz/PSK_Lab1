@@ -2,17 +2,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"> <!-- Added f namespace -->
+      xmlns:f="http://java.sun.com/jsf/core">
 <h:head>
-    <title>Group Management</title>
-    <link rel="stylesheet" href="css/styles.css"/>
+    <title>Groups (MyBatis)</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
 </h:head>
 <h:body>
     <div class="container">
         <div class="content">
             <h2>Groups</h2>
             <ol>
-                <ui:repeat value="#{groups.allGroups}" var="group">
+                <ui:repeat value="#{groupsMyBatis.allGroups}" var="group">
                     <li>
                         <h:link value="#{group.discipline} (Semester: #{group.semester})" outcome="students">
                             <f:param name="groupId" value="#{group.id}"/>
@@ -24,19 +24,19 @@
             <h2>Add Group</h2>
             <h:form>
                 <div>
-                    <h:outputLabel for="discipline" value="Discipline: " />
-                    <h:inputText id="discipline" value="#{groups.groupToCreate.discipline}" required="true" />
+                    <h:outputLabel for="discipline" value="Discipline: "/>
+                    <h:inputText id="discipline" value="#{groupsMyBatis.groupToCreate.discipline}" required="true"/>
                 </div>
                 <div>
-                    <h:outputLabel for="semester" value="Semester: " />
-                    <h:inputText id="semester" value="#{groups.groupToCreate.semester}" required="true" />
+                    <h:outputLabel for="semester" value="Semester: "/>
+                    <h:inputText id="semester" value="#{groupsMyBatis.groupToCreate.semester}" required="true"/>
                 </div>
                 <div>
-                    <h:commandButton value="Add Group" action="#{groups.createGroup}"/>
+                    <h:commandButton value="Add Group" action="#{groupsMyBatis.createGroup}"/>
                 </div>
             </h:form>
-            <!-- Added MyBatis implementation link -->
-            <h:link outcome="myBatis/groups" value="MyBatis implementation"/>
+
+            <h:link value="Back to JPA version" outcome="/index"/>
         </div>
     </div>
 </h:body>

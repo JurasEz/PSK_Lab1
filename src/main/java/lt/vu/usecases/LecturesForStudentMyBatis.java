@@ -15,8 +15,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-@Model // @RequestScoped ir @Named kombinacija
-public class LecturesForStudent {
+@Model
+public class LecturesForStudentMyBatis {
 
     @Inject
     private StudentsDAO studentsDAO;
@@ -24,7 +24,7 @@ public class LecturesForStudent {
     @Inject
     private LecturesDAO lecturesDAO;
 
-    private Student student;
+    private Student student; // This will hold the student object
     private Lecture lectureToCreate = new Lecture();
 
     @PostConstruct
@@ -39,7 +39,7 @@ public class LecturesForStudent {
             }
 
             Long studentId = Long.parseLong(studentIdParam);
-            this.student = studentsDAO.findOne(studentId);
+            this.student = studentsDAO.findOne(studentId); // Initialize the student object
 
             if (this.student == null) {
                 throw new IllegalArgumentException("Student not found with ID: " + studentId);
@@ -49,8 +49,6 @@ public class LecturesForStudent {
         }
     }
 
-    // Verslo logika: patikrina ar paskaita jau egzistuoja
-    // ir ar ją reikia sukurti ar priskirti studentui
     @Transactional
     public String createLecture() {
         try {

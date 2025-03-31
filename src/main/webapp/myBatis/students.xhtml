@@ -4,21 +4,21 @@
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
-    <title>Students List</title>
-    <link rel="stylesheet" href="css/styles.css"/>
+    <title>Students List (MyBatis)</title>
+    <link rel="stylesheet" href="../css/styles.css"/>
 </h:head>
 <h:body>
     <div class="container">
         <div class="content">
             <h:messages globalOnly="true" style="color:red"/>
 
-            <h2>Students in #{studentsForGroup.group.discipline}</h2>
+            <h2>Students in #{studentsForGroupMyBatis.group.discipline}</h2>
             <ul>
-                <ui:repeat value="#{studentsForGroup.allStudents}" var="student">
+                <ui:repeat value="#{studentsForGroupMyBatis.allStudents}" var="student">
                     <li>
                         <h:link value="#{student.name} #{student.surname}" outcome="studentDetails">
                             <f:param name="studentId" value="#{student.id}"/>
-                            <f:param name="groupId" value="#{studentsForGroup.group.id}"/>
+                            <f:param name="groupId" value="#{studentsForGroupMyBatis.group.id}"/>
                         </h:link>
                     </li>
                 </ui:repeat>
@@ -28,26 +28,22 @@
             <h:form>
                 <div>
                     <h:outputLabel for="firstName" value="First Name: " />
-                    <h:inputText id="firstName" value="#{studentsForGroup.studentToCreate.name}" required="true"/>
+                    <h:inputText id="firstName" value="#{studentsForGroupMyBatis.studentToCreate.name}" required="true"/>
                     <h:message for="firstName" style="color:red"/>
                 </div>
                 <div>
                     <h:outputLabel for="lastName" value="Last Name: " />
-                    <h:inputText id="lastName" value="#{studentsForGroup.studentToCreate.surname}" required="true"/>
+                    <h:inputText id="lastName" value="#{studentsForGroupMyBatis.studentToCreate.surname}" required="true"/>
                     <h:message for="lastName" style="color:red"/>
                 </div>
                 <div>
-                    <h:commandButton value="Add Student" action="#{studentsForGroup.createStudent}">
-                        <f:param name="groupId" value="#{studentsForGroup.group.id}"/>
+                    <h:commandButton value="Add Student" action="#{studentsForGroupMyBatis.createStudent}">
+                        <f:param name="groupId" value="#{studentsForGroupMyBatis.group.id}"/>
                     </h:commandButton>
                 </div>
             </h:form>
 
-            <p>
-                <h:link value="Back to Groups" outcome="index">
-                    <f:param name="preservedGroupId" value="#{studentsForGroup.group.id}"/>
-                </h:link>
-            </p>
+            <h:link value="Back to Groups" outcome="/myBatis/groups"/>
         </div>
     </div>
 </h:body>
