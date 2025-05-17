@@ -9,6 +9,7 @@ import javax.annotation.security.PermitAll;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.OptimisticLockException;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -72,18 +73,27 @@ public class StudentController {
     @PUT
     @Path("{id}")
     public Response update(@PathParam("id") Long id, StudentDto dto) {
-        Student student = em.find(Student.class, id);
-        if (student == null) {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-        student.setName(dto.getName());
-        student.setSurname(dto.getSurname());
+        // Build a _detached_ entity carrying the client’s version
+        Student detached = new Student();
+        detached.setId(id);
+        detached.setVersion(dto.getVersion());
+        detached.setName(dto.getName());
+        detached.setSurname(dto.getSurname());
         if (dto.getGroupId() != null) {
-            Group group = em.find(Group.class, dto.getGroupId());
-            student.setGroup(group);
+            detached.setGroup(em.getReference(Group.class, dto.getGroupId())); // sets the FK without touching the db
         }
-        Student updated = em.merge(student);
-        return Response.ok(toDto(updated)).build();
+
+        try {
+            Student merged = em.merge(detached);  // will check version (compares the DB’s 'version' against detached.getVersion())
+            return Response.ok(toDto(merged)).build(); // returns HTTP 200 with the updated entity
+        } catch (OptimisticLockException ole) {
+            // 1) the transaction is rollback-only
+            // 2) the EM is unusable—container will clear it
+            //    Return a 409 Conflict so the client knows there was a version mismatch
+            return Response.status(Response.Status.CONFLICT)
+                    .entity("Conflict: resource was updated by another transaction")
+                    .build();
+        }
     }
 
     @DELETE
@@ -97,13 +107,14 @@ public class StudentController {
         return Response.noContent().build();
     }
 
-    private StudentDto toDto(Student student) {
+    private StudentDto toDto(Student s) {
         StudentDto dto = new StudentDto();
-        dto.setId(student.getId());
-        dto.setName(student.getName());
-        dto.setSurname(student.getSurname());
-        if (student.getGroup() != null) {
-            dto.setGroupId(student.getGroup().getId());
+        dto.setId(s.getId());
+        dto.setVersion(s.getVersion());
+        dto.setName(s.getName());
+        dto.setSurname(s.getSurname());
+        if (s.getGroup() != null) {
+            dto.setGroupId(s.getGroup().getId());
         }
         return dto;
     }

@@ -6,7 +6,8 @@ import lombok.Setter;
 @Getter @Setter
 public class StudentDto {
     private Long id;
+    private Integer version;
     private String name;
     private String surname;
-    private Long groupId;   // optional: student’s group FK
+    private Long groupId;
 }

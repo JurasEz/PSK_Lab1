@@ -21,6 +21,10 @@ public class Student {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Version
+    @Column(name = "VERSION")
+    private Integer version; // for optimistic locking
+
     @Basic(optional = false)
     private String name;
 
