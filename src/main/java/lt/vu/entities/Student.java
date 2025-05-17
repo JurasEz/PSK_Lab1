@@ -38,4 +38,5 @@ public class Student {
             inverseJoinColumns = @JoinColumn(name = "lecture_id")
     )
     private List<Lecture> lectures = new ArrayList<>();
+
 }

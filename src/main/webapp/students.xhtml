@@ -13,10 +13,11 @@
             <h:messages globalOnly="true" style="color:red"/>
 
             <h2>Students in #{studentsForGroup.group.discipline}</h2>
+
             <ul>
                 <ui:repeat value="#{studentsForGroup.allStudents}" var="student">
                     <li>
-                        <h:link value="#{student.name} #{student.surname}" outcome="studentDetails">
+                        <h:link value="#{student.name} #{student.surname} (#{student.lectures.size()} lectures)" outcome="studentDetails">
                             <f:param name="studentId" value="#{student.id}"/>
                             <f:param name="groupId" value="#{studentsForGroup.group.id}"/>
                         </h:link>
@@ -36,6 +37,7 @@
                     <h:inputText id="lastName" value="#{studentsForGroup.studentToCreate.surname}" required="true"/>
                     <h:message for="lastName" style="color:red"/>
                 </div>
+
                 <div>
                     <h:commandButton value="Add Student" action="#{studentsForGroup.createStudent}">
                         <f:param name="groupId" value="#{studentsForGroup.group.id}"/>
@@ -52,3 +54,17 @@
     </div>
 </h:body>
 </html>
+
+<!-- <h:link value="#{student.name} #{student.surname}" outcome="studentDetails">
+
+    <ul>
+        <ui:repeat value="#{studentsForGroup.allStudents}" var="student">
+            <li>
+                <h:link value="#{student.name} #{student.surname} (#{student.lecturesCount} lectures)" outcome="studentDetails">
+                    <f:param name="studentId" value="#{student.id}"/>
+                    <f:param name="groupId" value="#{studentsForGroup.group.id}"/>
+                </h:link>
+            </li>
+        </ui:repeat>
+    </ul>
+-->

@@ -73,4 +73,10 @@ public class StudentsForGroup {
     public List<Student> getAllStudents() {
         return studentService.findByGroupId(group.getId());
     }
+    public int getLecturesCount(Student student) {
+        if (student == null || student.getLectures() == null) {
+            return 0;
+        }
+        return student.getLectures().size();
+    }
 }
