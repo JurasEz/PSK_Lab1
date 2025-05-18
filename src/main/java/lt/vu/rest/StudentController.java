@@ -3,6 +3,7 @@ package lt.vu.rest;
 
 import lt.vu.entities.Group;
 import lt.vu.entities.Student;
+import lt.vu.persistence.StudentsDAO;
 import lt.vu.rest.contracts.StudentDto;
 
 import javax.annotation.security.PermitAll;
@@ -29,6 +30,9 @@ public class StudentController {
 
     @PersistenceContext(unitName = "StudentPersistenceUnit")
     private EntityManager em;
+
+    //@Inject
+    //private StudentsDAO studentsDAO;
 
     @GET
     public Response getAll() {
@@ -84,6 +88,7 @@ public class StudentController {
         }
 
         try {
+            // Student merged = studentsDAO.update(detached);
             Student merged = em.merge(detached);  // will check version (compares the DB’s 'version' against detached.getVersion())
             return Response.ok(toDto(merged)).build(); // returns HTTP 200 with the updated entity
         } catch (OptimisticLockException ole) {
