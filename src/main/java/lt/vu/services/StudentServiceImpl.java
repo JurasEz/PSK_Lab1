@@ -2,6 +2,7 @@ package lt.vu.services;
 
 import lt.vu.entities.Lecture;
 import lt.vu.entities.Student;
+import lt.vu.interceptors.Loggable;
 import lt.vu.persistence.StudentsDAO;
 import lt.vu.persistence.LecturesDAO;
 import javax.enterprise.context.ApplicationScoped;
@@ -10,6 +11,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 @ApplicationScoped
+@Loggable
 public class StudentServiceImpl implements StudentService {
 
     @Inject

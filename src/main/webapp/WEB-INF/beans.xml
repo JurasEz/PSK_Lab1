@@ -6,6 +6,17 @@
        bean-discovery-mode="annotated">
 
     <interceptors>
-        <class>lt.vu.interceptors.MethodLogger</class>
+        <class>lt.vu.interceptors.LoggingInterceptor</class>
     </interceptors>
+
+    <!-- Enable the mock in place of the real StudentServiceImpl
+    <alternatives>
+        <class>lt.vu.services.MockStudentService</class>
+    </alternatives> -->
+
+
+    <!-- Activate our SMS decorator -->
+    <decorators>
+        <class>lt.vu.services.SmsNotificationDecorator</class>
+    </decorators>
 </beans>

@@ -3,8 +3,10 @@ package lt.vu.rest;
 
 import lt.vu.entities.Group;
 import lt.vu.entities.Student;
+import lt.vu.interceptors.Loggable;
 import lt.vu.persistence.StudentsDAO;
 import lt.vu.rest.contracts.StudentDto;
+import lt.vu.services.StudentService;
 
 import javax.annotation.security.PermitAll;
 import javax.enterprise.context.ApplicationScoped;
@@ -26,6 +28,7 @@ import java.util.stream.Collectors;
 @Consumes(MediaType.APPLICATION_JSON)
 @PermitAll
 @Transactional
+@Loggable // wraps the bean (or method) with your LoggingInterceptor
 public class StudentController {
 
     @PersistenceContext(unitName = "StudentPersistenceUnit")
@@ -34,10 +37,13 @@ public class StudentController {
     //@Inject
     //private StudentsDAO studentsDAO;
 
+    @Inject
+    private StudentService studentService;  // inject the service for getAll()
+
     @GET
     public Response getAll() {
-        List<Student> students = em.createNamedQuery("Student.findAll", Student.class)
-                .getResultList();
+        // now goes through AuditingStudentService.findAll()
+        List<Student> students = studentService.findAll();
         List<StudentDto> dtos = students.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());
@@ -47,7 +53,8 @@ public class StudentController {
     @GET
     @Path("{id}")
     public Response getOne(@PathParam("id") Long id) {
-        Student student = em.find(Student.class, id);
+        // Student student = em.find(Student.class, id);
+        Student student = studentService.findById(id);
         if (student == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
